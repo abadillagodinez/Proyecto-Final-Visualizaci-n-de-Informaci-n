@@ -1,0 +1,21 @@
+@font-face {
+    font-family: BeaufortforLOL-Bold;
+    src: url("./BeaufortForLOL/beaufortforlol-bold.otf") format("opentype");
+}
+
+.button{
+    font-family: "BeaufortforLOL-Bold";
+    width:100px;
+    height: 25px;
+}
+
+.header{
+    color:rgb(240, 230, 210);
+    font-family: "BeaufortforLOL-Bold";
+}
+
+.selector{
+    width:700px;
+    height: 30px;
+    font-family: "BeaufortforLOL-Bold";
+}

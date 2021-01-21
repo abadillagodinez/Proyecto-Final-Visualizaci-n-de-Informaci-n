@@ -1,6 +1,9 @@
+<!doctype html>
 <html>
+    <meta charset="UTF-8"/>
     <head>
         <title> Visualizacion de Gráficos LOL</title>
+         <link rel="stylesheet" href="styles.css">
     </head>
 
     <body style = "background-color:#00000f;">
@@ -8,9 +11,9 @@
         <div style="text-align: center;">
             <img src="images/logo2.jpg">
             
-            <h1 style = "color:rgb(240, 230, 210)">Seleccione el tipo de gráfico que desea visualizar</h1>
+            <h1 class="header">Seleccione el tipo de gráfico que desea visualizar</h1>
             
-            <select name="cars" id="cars" style = "width:700px;height: 30px;">
+            <select class="selector" name="cars" id="cars">
                 <option value="null">--------------------------------------------------------------Seleccione una opción--------------------------------------------------------------</option>
                 <option value="barras">Promedio de Victorias de Campeón Agrupado por Posición</option>
                 <option value="lol">Campeones más Jugados por Equipo </option>
@@ -19,7 +22,7 @@
                 
             </select>
             <br> </br>
-            <button name= "aceptar" id= "accept" style = "width:100px;height: 25px;" onclick="">Desplegar</button>
+            <button class="button" name="aceptar" id="accept" onclick="">Desplegar</button>
             
         </div>
 
@@ -42,7 +45,6 @@
                 document.getElementById('cars').style.display = 'inline';
             }
 
-        
         </script>
 
 
