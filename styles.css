@@ -5,17 +5,26 @@
 
 .button{
     font-family: "BeaufortforLOL-Bold";
+    font-size: 14px;
     width:100px;
     height: 25px;
+    background-color: #937341;
+    border-color: #937341;
+    color: #f0e6d2;
+    border-radius:2em;
 }
 
 .header{
     color:rgb(240, 230, 210);
     font-family: "BeaufortforLOL-Bold";
+    font-size: 36px;
+    color: #f0e6d2;
 }
 
 .selector{
     width:700px;
     height: 30px;
     font-family: "BeaufortforLOL-Bold";
+    font-size: 14px;
 }
+
