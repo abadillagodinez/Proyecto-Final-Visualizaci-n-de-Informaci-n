@@ -19,3 +19,18 @@
     height: 30px;
     font-family: "BeaufortforLOL-Bold";
 }
+
+/* parte del svg*/
+
+.axis .domain {
+  display: none;
+}
+
+div#my_dataviz {
+  width: 1000px;
+  height: 600px;
+  margin: auto;
+  background-color: #ffffff;
+}
+
+/*Termina parte del SVG*/

@@ -5,9 +5,14 @@
         <title> Visualizacion de Gráficos LOL</title>
          <link rel="stylesheet" href="styles.css">
     </head>
-
+   
+}
     <body style = "background-color:#00000f;">
-        
+        <script src="https://d3js.org/d3.v5.js"></script>
+        <script src="graficoBarras.js"></script>
+        <script src="graficoLOL.js"></script>
+        <script src="graficoSpider.js"></script>
+        <script src="gráficoCoordenadas.js"></script>
         <div style="text-align: center;">
             <img src="images/logo2.jpg">
             
@@ -22,8 +27,10 @@
                 
             </select>
             <br> </br>
-            <button class="button" name="aceptar" id="accept" onclick="">Desplegar</button>
-            
+            <button class="button" name="aceptar" id="accept" onclick="vis()">Desplegar</button>
+            <div id = "my_dataviz">
+                <svg width="960" height="500"></svg>
+            </div>
         </div>
 
 
@@ -46,7 +53,9 @@
             }
 
         </script>
-
+        <div id='container'>
+            <svg> </svg>
+          </div>
 
     </body>
     
