@@ -5,32 +5,96 @@
 
 .button{
     font-family: "BeaufortforLOL-Bold";
+    font-size: 14px;
     width:100px;
     height: 25px;
+    background-color: #937341;
+    border-color: #937341;
+    color: #f0e6d2;
+    border-radius:2em;
 }
 
 .header{
     color:rgb(240, 230, 210);
     font-family: "BeaufortforLOL-Bold";
+    font-size: 36px;
+    color: #f0e6d2;
 }
 
 .selector{
     width:700px;
     height: 30px;
     font-family: "BeaufortforLOL-Bold";
+    font-size: 14px;
 }
 
-/* parte del svg*/
+/* data table styles */
+#grid { height: 220px; margin-left: 150px; overflow-y:auto;}
+.row, .header { clear: left; font-size: 11px; line-height: 24px; height: 24px; }
+.row:nth-child(odd) { background: rgba(0,0,0,0.05); }
+.header { font-weight: bold; color: #937341;}
+.cell { float: left; overflow: hidden; white-space: nowrap; width: 98px; height: 18px; color: #c8aa6e;}
+.col-0 { width: 230px; }
 
-.axis .domain {
-  display: none;
-}
 
-div#my_dataviz {
-  width: 1000px;
-  height: 600px;
-  margin: auto;
-  background-color: #ffffff;
-}
+/* parcoords styles */
+.parcoords > svg, .parcoords > canvas { 
+    font-size: 14px;
+    font-family: sans-serif;
+    position: absolute;
+  }
+  .parcoords > canvas {
+    pointer-events: none;
+  }
+  
+  .parcoords text.label {
+    cursor: default;
+    stroke: #c8aa6e;
+    fill: #c8aa6e;
+  }
+  
+  .parcoords rect.background {
+    fill: transparent;
+  }
+  .parcoords rect.background:hover {
+    fill: rgba(120,120,120,0.2);
+  }
+  .parcoords .resize rect {
+    fill: rgba(0,0,0,0.1);
+  }
+  .parcoords rect.extent {
+    fill: rgba(255,255,255,0.25);
+    stroke: rgba(0,0,0,0.6);
+  }
+  .parcoords .axis line, .parcoords .axis path {
+    stroke-width: 2px;
+    fill: none;
+    stroke: #b99a5d;
+    shape-rendering: crispEdges;
+  } 
+  
+  .parcoords .axis text{
+    fill: #c8aa6e;
+  }
+  .parcoords canvas {
+    opacity: 1;
+    -moz-transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+  }
+  .parcoords canvas.faded {
+    opacity: 0.20;
+  }
+  .parcoords { 
+    height: 210px;
+    width: 1400px;
+    margin-top: 15px;
+    margin-left: 90px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
-/*Termina parte del SVG*/

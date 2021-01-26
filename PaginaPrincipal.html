@@ -5,8 +5,11 @@
         <title> Visualizacion de Gráficos LOL</title>
          <link rel="stylesheet" href="styles.css">
     </head>
-   
-}
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <script src="d3.parcoords.js"></script>
+    <script src="divgrid.js"></script>
+    <script src="gráficoCoordenadas.js"></script>
+
     <body style = "background-color:#00000f;">
         <script src="https://d3js.org/d3.v5.js"></script>
         <script src="graficoBarras.js"></script>
@@ -27,12 +30,11 @@
                 
             </select>
             <br> </br>
-            <button class="button" name="aceptar" id="accept" onclick="vis()">Desplegar</button>
-            <div id = "my_dataviz">
-                <svg width="960" height="500"></svg>
-            </div>
+            <button class="button" name="aceptar" id="accept" onclick="visParCoords()">Desplegar</button>
+              
         </div>
-
+        <div id='container'></div>
+        <div id="grid"></div>
 
 
 
