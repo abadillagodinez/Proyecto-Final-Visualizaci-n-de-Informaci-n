@@ -106,5 +106,125 @@ def genCSVSpider():
     file.write(newCsv)
     file.close()
 
-genCSVParCoods()
-genCSVSpider()
+def getAllTeamsRedAndBlue():
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    redTeams = []
+    blueTeams = []
+    for i in dataMatches.index:
+        redTeams += [dataMatches["redteam"][i]]
+        blueTeams += [dataMatches["blueteam"][i]]
+    uniqueReds = []
+    uniqueBlues = []
+    for team in redTeams:
+        if team not in uniqueReds:
+            uniqueReds += [team]
+    for team in blueTeams:
+        if team not in uniqueBlues:
+            uniqueBlues += [team]
+    return uniqueBlues, uniqueReds    
+
+def getMostTopPlayedByRTeam(redTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["redteam"][i] == redTeam:
+            champsPlayed += [dataMatches["redtop"][i]]
+    return (most_frequent(champsPlayed))
+
+def getMostJunglePlayedByRTeam(redTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["redteam"][i] == redTeam:
+            champsPlayed += [dataMatches["redjungle"][i]]
+    return (most_frequent(champsPlayed))
+
+def getMostMidPlayedByRTeam(redTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["redteam"][i] == redTeam:
+            champsPlayed += [dataMatches["redmid"][i]]
+    return (most_frequent(champsPlayed))
+
+def getMostAdcPlayedByRTeam(redTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["redteam"][i] == redTeam:
+            champsPlayed += [dataMatches["redadc"][i]]
+    return (most_frequent(champsPlayed))
+
+def getMostSuppPlayedByRTeam(redTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["redteam"][i] == redTeam:
+            champsPlayed += [dataMatches["redsupport"][i]]
+    return (most_frequent(champsPlayed))
+
+def getMostTopPlayedByBTeam(blueTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["blueteam"][i] == blueTeam:
+            champsPlayed += [dataMatches["redtop"][i]]
+    return (most_frequent(champsPlayed))
+
+def getMostJunglePlayedByBTeam(blueTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["blueteam"][i] == blueTeam:
+            champsPlayed += [dataMatches["bluejungle"][i]]
+    return (most_frequent(champsPlayed))
+
+def getMostMidPlayedByBTeam(blueTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["blueteam"][i] == blueTeam:
+            champsPlayed += [dataMatches["bluemid"][i]]
+    return (most_frequent(champsPlayed))
+
+def getMostAdcPlayedByBTeam(blueTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["blueteam"][i] == blueTeam:
+            champsPlayed += [dataMatches["blueadc"][i]]
+    return (most_frequent(champsPlayed))
+
+def getMostSuppPlayedByBTeam(blueTeam):
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    champsPlayed = []
+    for i in dataMatches.index:
+        if dataMatches["blueteam"][i] == blueTeam:
+            champsPlayed += [dataMatches["bluesupport"][i]]
+    return (most_frequent(champsPlayed))
+
+def genCSVMap():
+    blueTeams, redTeams = getAllTeamsRedAndBlue()
+    # genera csv rojos
+    newCsv = "Team,Top,Jungle,Mid,Adc,Support\n"
+  
+    for team in blueTeams:
+        redTop = getMostTopPlayedByRTeam(team)
+        redJg = getMostJunglePlayedByRTeam(team)
+        redMid = getMostMidPlayedByRTeam(team)
+        redAdc = getMostAdcPlayedByRTeam(team)
+        redSup = getMostSuppPlayedByRTeam(team)
+        newCsv += team + "," + redTop + "," + redJg + "," + redMid + "," + redAdc + "," + redSup + "\n"
+    
+    print(newCsv)
+
+
+
+def most_frequent(List): 
+    return max(set(List), key = List.count) 
+
+# genCSVParCoods()
+# genCSVSpider()
+# getAllTeamsRed()
+# print(getMostAdcPlayedByBTeam("T1"))
+genCSVMap()
