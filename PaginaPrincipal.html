@@ -37,6 +37,7 @@
         </div>
         <div id='container'></div>
         <div id= 'radar-cont'></div>
+        <div id= 'lol'></div>
         <br>
         <div id="grid"></div>
 
@@ -50,10 +51,15 @@
                     return;
                 }
                 else if(opcion == "lol"){
-                    return;
+                    ocultar('radar-cont');
+                    ocultar('container');
+                    ocultar('grid');
+                    //document.getElementById("lol").setAttribute("style", "text-align: center");
+                    return crearLOL();
                 }
                 else if(opcion == "coordenadas"){
                 ocultar('radar-cont');
+                ocultar('lol');
                 document.getElementById("container").setAttribute("style", "text-align: left");
                 document.getElementById("grid").setAttribute("style", "text-align: left");
                 
@@ -61,6 +67,7 @@
                 }
                 else if(opcion == "spider"){
                     ocultar('container');
+                    ocultar('lol');
                 document.getElementById("radar-cont").setAttribute("style", "text-align: center");
                 document.getElementById("grid").setAttribute("style", "text-align: center");
                     return showRadar();
@@ -82,10 +89,7 @@
         </script>
         
         <script id = "spiderChart">
-            function showRadar(){
-                //document.getElementById("container").setAttribute("style", "text-align: center");
-                //document.getElementById("grid").setAttribute("style", "text-align: center");
-                //document.getElementById('grid').style.display = 'none';   
+            function showRadar(){  
                 var data = [];
                 var chart = RadarChart.chart();
                 
