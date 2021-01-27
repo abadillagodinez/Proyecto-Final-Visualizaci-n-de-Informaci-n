@@ -36,7 +36,7 @@
               
         </div>
         <div id='container'></div>
-        <div id= 'radarCont'></div>
+        <div id= 'radar-cont'></div>
         <br>
         <div id="grid"></div>
 
@@ -57,16 +57,16 @@
                 //document.getElementById("grid").innerHTML = "";
                 document.getElementById("container").setAttribute("style", "text-align: left");
                 document.getElementById("grid").setAttribute("style", "text-align: left");
-                ocultar('radarCont');
+                ocultar('radar-cont');
                 //mostrar('container');
                     return visParCoords();
                 }
                 else if(opcion == "spider"){
                     ocultar('container');
-                mostrar('radarCont');
-                document.getElementById("container").innerHTML = "";
+                mostrar('radar-cont');
+                document.getElementById("radar-cont").innerHTML = "";
                 document.getElementById("grid").innerHTML = "";
-                document.getElementById("container").setAttribute("style", "text-align: left");
+                document.getElementById("radar-cont").setAttribute("style", "text-align: center");
                 document.getElementById("grid").setAttribute("style", "text-align: left");
                     return showRadar();
                 }
@@ -118,7 +118,7 @@
                 RadarChart.defaultConfig.radius = 3;
                 RadarChart.defaultConfig.w = w;
                 RadarChart.defaultConfig.h = h;
-                RadarChart.draw("#container", data);
+                RadarChart.draw("#radar-cont", data);
 
                 function animate(elem,time) {
                     if( !elem) return;
@@ -133,7 +133,7 @@
                         window.scrollTo(0,(from+1));
                     }
 
-                var divVal = document.getElementById('container');
+                var divVal = document.getElementById('radar-cont');
                 animate(divVal,600);
 
                 var grid = d3.divgrid();
