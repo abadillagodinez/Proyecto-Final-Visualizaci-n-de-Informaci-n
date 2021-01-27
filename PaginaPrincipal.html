@@ -4,14 +4,16 @@
     <head>
         <title> Visualizacion de Gráficos LOL</title>
          <link rel="stylesheet" href="styles.css">
+         <link rel="stylesheet" href="radar-chart.css">
     </head>
     <script src="https://d3js.org/d3.v3.js"></script>
     <script src="d3.parcoords.js"></script>
     <script src="divgrid.js"></script>
     <script src="gráficoCoordenadas.js"></script>
+    
 
     <body style = "background-color:#00000f;">
-        <script src="https://d3js.org/d3.v5.js"></script>
+    
         <script src="graficoBarras.js"></script>
         <script src="graficoLOL.js"></script>
         <script src="graficoSpider.js"></script>
@@ -21,7 +23,7 @@
             
             <h1 class="header">Seleccione el tipo de gráfico que desea visualizar</h1>
             
-            <select class="selector" name="cars" id="cars">
+            <select class="selector" name="selector" id="selector">
                 <option value="null">--------------------------------------------------------------Seleccione una opción--------------------------------------------------------------</option>
                 <option value="barras">Promedio de Victorias de Campeón Agrupado por Posición</option>
                 <option value="lol">Campeones más Jugados por Equipo </option>
@@ -30,34 +32,122 @@
                 
             </select>
             <br> </br>
-            <button class="button" name="aceptar" id="accept" onclick="visParCoords()">Desplegar</button>
+            <button class="button" name="aceptar" id="accept" onclick="desplegar()">Desplegar</button>
               
         </div>
         <div id='container'></div>
+        <div id= 'radarCont'></div>
+        <br>
         <div id="grid"></div>
 
 
 
         <script id = "desplegar">
-            
-            function visualizar(){
-                //se limpian los campos del grafico y de la tabla para asegurar que solo se muestre la informacion actual
-                document.getElementById("example").innerHTML = "";
+            function desplegar ()
+            {
+                var opcion = document.getElementById("selector").value;
+                if (opcion == "barras"){
+                    return;
+                }
+                else if(opcion == "lol"){
+                    return;
+                }
+                else if(opcion == "coordenadas"){
+                //document.getElementById("container").innerHTML = "";
+                //document.getElementById("grid").innerHTML = "";
+                document.getElementById("container").setAttribute("style", "text-align: left");
+                document.getElementById("grid").setAttribute("style", "text-align: left");
+                ocultar('radarCont');
+                //mostrar('container');
+                    return visParCoords();
+                }
+                else if(opcion == "spider"){
+                    ocultar('container');
+                mostrar('radarCont');
+                document.getElementById("container").innerHTML = "";
                 document.getElementById("grid").innerHTML = "";
+                document.getElementById("container").setAttribute("style", "text-align: left");
+                document.getElementById("grid").setAttribute("style", "text-align: left");
+                    return showRadar();
+                }
 
-            }
+            };
+
+            
             //funciones de ocultar y mostrar objetos para poder ocultar los gráficos, los botones y los labels #mas adelante son importantes#
-            function ocultar(){
-                document.getElementById('cars').style.display = 'none';
+            function ocultar(valor){
+                document.getElementById(valor).style.display = 'none';
             }
-            function mostrar(){
-                document.getElementById('cars').style.display = 'inline';
+            function mostrar(valor){
+                document.getElementById(valor).style.display = 'inline';
             }
+        
+        
 
         </script>
-        <div id='container'>
-            <svg> </svg>
-          </div>
+        
+        <script id = "spiderChart">
+            function showRadar(){
+                //document.getElementById("container").setAttribute("style", "text-align: center");
+                //document.getElementById("grid").setAttribute("style", "text-align: center");
+                //document.getElementById('grid').style.display = 'none';   
+                var data = [];
+                var chart = RadarChart.chart();
+                
+                var c = "Team,FB\%,FT\%,F3T\%,HLD\%,FD\%,DRG\%,ELD\%,BN\% \nDAMWON Gaming,47,82,88,79,82,75,50,76\nDRX,56,67,44,56,22,47,0,25\nFlyQuest,50,50,50,42,67,52,0,63\nFnatic,82,64,64,33,55,56,100,55\nG2 Esports,57,50,29,44,29,45,100,40\nGen.G,44,56,56,72,56,53,0,73\nJD Gaming,40,40,50,58,50,39,0,55\nLGD Gaming,33,33,50,33,67,48,0,33\nMachi Esports,17,33,33,42,67,48,0,38\nPSG Talon,33,17,33,27,50,50,0,40\nRogue,67,50,17,25,0,19,0,17\nSuning,63,47,68,46,53,55,67,59\nTeam Liquid,67,50,50,42,33,46,0,60\nTop Esports,33,40,47,57,53,53,0,57\nTSM,33,17,17,45,33,36,0,13\nUnicorns Of Love.CIS,50,50,17,42,50,27,0,22",
+                w = 500,
+                h = 400,
+                csv = c.split("\n").map(function(i){return i.split(",")})
+                headers = []
+                csv.forEach(function(item, i){
+                if(i==0){
+                headers = item;
+                }else{
+                newSeries = {};
+                item.forEach( function(v, j){
+                    if(j==0){
+                    newSeries.className = v;
+                    newSeries.axes = [];
+                    }else{
+                    newSeries.axes.push({"axis":[headers[j]], "value": parseFloat(v)});
+                    }
+                });
+                data.push(newSeries);
+                }
+                })
+                RadarChart.defaultConfig.radius = 3;
+                RadarChart.defaultConfig.w = w;
+                RadarChart.defaultConfig.h = h;
+                RadarChart.draw("#container", data);
+
+                function animate(elem,time) {
+                    if( !elem) return;
+                    var to = elem.offsetTop;
+                    var from = window.scrollY;
+                    var start = new Date().getTime(),
+                        timer = setInterval(function() {
+                            var step = Math.min(1,(new Date().getTime()-start)/time);
+                            window.scrollTo(0,(from+step*(to-from))+1);
+                            if( step == 1){ clearInterval(timer);};
+                        },25);
+                        window.scrollTo(0,(from+1));
+                    }
+
+                var divVal = document.getElementById('container');
+                animate(divVal,600);
+
+                var grid = d3.divgrid();
+                    d3.select("#grid")
+                        .datum(csv)
+                        .call(grid)
+                        .selectAll(".row");
+                        //.on({
+                        //  "mouseover": function (d) { parcoords.highlight([d]); },
+                        //  "mouseout": RadarChart.unhighlight
+                        //});
+                        
+                }
+        </script>
 
     </body>
     

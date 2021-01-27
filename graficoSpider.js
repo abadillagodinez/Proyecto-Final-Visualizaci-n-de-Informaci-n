@@ -376,6 +376,7 @@ var RadarChart = {
       .attr("height", cfg.h)
       .datum(d)
       .call(chart);
+
+      
     }
   };
-v  
