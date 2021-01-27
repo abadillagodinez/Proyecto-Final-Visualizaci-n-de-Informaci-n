@@ -34,31 +34,7 @@ var RadarChart = {
     chart: function() {
       // default config
       var cfg = Object.create(RadarChart.defaultConfig);
-      function setTooltip(tooltip, msg){
-        if(msg === false || msg == undefined){
-          tooltip.classed("visible", 0);
-          tooltip.select("rect").classed("visible", 0);
-        }else{
-          tooltip.classed("visible", 1);
-  
-          var container = tooltip.node().parentNode;
-          var coords = d3.mouse(container);
-  
-          tooltip.select("text").classed('visible', 1).style("fill", cfg.tooltipColor);
-          var padding=5;
-          var bbox = tooltip.select("text").text(msg).node().getBBox();
-  
-          tooltip.select("rect")
-          .classed('visible', 1).attr("x", 0)
-          .attr("x", bbox.x - padding)
-          .attr("y", bbox.y - padding)
-          .attr("width", bbox.width + (padding*2))
-          .attr("height", bbox.height + (padding*2))
-          .attr("rx","5").attr("ry","5")
-          .style("fill", cfg.backgroundTooltipColor).style("opacity", cfg.backgroundTooltipOpacity);
-          tooltip.attr("transform", "translate(" + (coords[0]+10) + "," + (coords[1]-10) + ")")
-        }
-      }
+      
       function radar(selection) {
         selection.each(function(data) {
           var container = d3.select(this);
@@ -217,55 +193,8 @@ var RadarChart = {
               axis.y = (cfg.h/2-radius2)+getVerticalPosition(i, radius2, (parseFloat(Math.max(axis.value - cfg.minValue, 0))/maxValue)*cfg.factor);
             });
           });
-          var polygon = container.selectAll(".area").data(data, cfg.axisJoin);
-  
-          var polygonType = 'polygon';
-          if (cfg.open) {
-            polygonType = 'polyline';
-          }
-  
-          polygon.enter().append(polygonType)
-          .classed({area: 1, 'd3-enter': 1})
-          .on('mouseover', function (dd){
-            d3.event.stopPropagation();
-            container.classed('focus', 1);
-            d3.select(this).classed('focused', 1);
-            setTooltip(tooltip, cfg.tooltipFormatClass(dd.className));
-          })
-          .on('mouseout', function(){
-            d3.event.stopPropagation();
-            container.classed('focus', 0);
-            d3.select(this).classed('focused', 0);
-            setTooltip(tooltip, false);
-          });
-  
-          polygon.exit()
-          .classed('d3-exit', 1) // trigger css transition
-          .transition().duration(cfg.transitionDuration)
-          .remove();
-  
-          polygon
-          .each(function(d, i) {
-            var classed = {'d3-exit': 0}; // if exiting element is being reused
-            classed['radar-chart-serie' + i] = 1;
-            if(d.className) {
-              classed[d.className] = 1;
-            }
-            d3.select(this).classed(classed);
-          })
-          // styles should only be transitioned with css
-          .style('stroke', function(d, i) { return cfg.color(i); })
-          .style('fill', function(d, i) { return cfg.color(i); })
-          .transition().duration(cfg.transitionDuration)
-          // svg attrs with js
-          .attr('points',function(d) {
-            return d.axes.map(function(p) {
-              return [p.x, p.y].join(',');
-            }).join(' ');
-          })
-          .each('start', function() {
-            d3.select(this).classed('d3-enter', 0); // trigger css transition
-          });
+          
+          var polygon = makepolygon(container,data,cfg,tooltip);
   
           if(cfg.circles && cfg.radius) {
   
@@ -297,13 +226,13 @@ var RadarChart = {
             .classed({circle: 1, 'd3-enter': 1})
             .on('mouseover', function(dd){
               d3.event.stopPropagation();
-              setTooltip(tooltip, cfg.tooltipFormatValue(dd[0].value));
+              setTooltip(tooltip, cfg.tooltipFormatValue(dd[0].value),cfg);
               //container.classed('focus', 1);
               //container.select('.area.radar-chart-serie'+dd[1]).classed('focused', 1);
             })
             .on('mouseout', function(dd){
               d3.event.stopPropagation();
-              setTooltip(tooltip, false);
+              setTooltip(tooltip, false,cfg);
               container.classed('focus', 0);
               //container.select('.area.radar-chart-serie'+dd[1]).classed('focused', 0);
               //No idea why previous line breaks tooltip hovering area after hoverin point.
@@ -378,5 +307,85 @@ var RadarChart = {
       .call(chart);
 
       
+    }
+
+    
+
+  };
+  function makepolygon(container,data,cfg,tooltip){
+    var polygon = container.selectAll(".area").data(data, cfg.axisJoin);
+  
+          var polygonType = 'polygon';
+          if (cfg.open) {
+            polygonType = 'polyline';
+          }
+  
+          polygon.enter().append(polygonType)
+          .classed({area: 1, 'd3-enter': 1})
+          .on('mouseover', function (dd){
+            d3.event.stopPropagation();
+            container.classed('focus', 1);
+            d3.select(this).classed('focused', 1);
+            setTooltip(tooltip, cfg.tooltipFormatClass(dd.className),cfg);
+          })
+          .on('mouseout', function(){
+            d3.event.stopPropagation();
+            container.classed('focus', 0);
+            d3.select(this).classed('focused', 0);
+            setTooltip(tooltip, false,cfg);
+          });
+  
+          polygon.exit()
+          .classed('d3-exit', 1) // trigger css transition
+          .transition().duration(cfg.transitionDuration)
+          .remove();
+  
+          polygon
+          .each(function(d, i) {
+            var classed = {'d3-exit': 0}; // if exiting element is being reused
+            classed['radar-chart-serie' + i] = 1;
+            if(d.className) {
+              classed[d.className] = 1;
+            }
+            d3.select(this).classed(classed);
+          })
+          // styles should only be transitioned with css
+          .style('stroke', function(d, i) { return cfg.color(i); })
+          .style('fill', function(d, i) { return cfg.color(i); })
+          .transition().duration(cfg.transitionDuration)
+          // svg attrs with js
+          .attr('points',function(d) {
+            return d.axes.map(function(p) {
+              return [p.x, p.y].join(',');
+            }).join(' ');
+          })
+          .each('start', function() {
+            d3.select(this).classed('d3-enter', 0); // trigger css transition
+          });
+          return polygon
+  };
+  function setTooltip(tooltip, msg,cfg){
+    if(msg === false || msg == undefined){
+      tooltip.classed("visible", 0);
+      tooltip.select("rect").classed("visible", 0);
+    }else{
+      tooltip.classed("visible", 1);
+
+      var container = tooltip.node().parentNode;
+      var coords = d3.mouse(container);
+
+      tooltip.select("text").classed('visible', 1).style("fill", cfg.tooltipColor);
+      var padding=5;
+      var bbox = tooltip.select("text").text(msg).node().getBBox();
+
+      tooltip.select("rect")
+      .classed('visible', 1).attr("x", 0)
+      .attr("x", bbox.x - padding)
+      .attr("y", bbox.y - padding)
+      .attr("width", bbox.width + (padding*2))
+      .attr("height", bbox.height + (padding*2))
+      .attr("rx","5").attr("ry","5")
+      .style("fill", cfg.backgroundTooltipColor).style("opacity", cfg.backgroundTooltipOpacity);
+      tooltip.attr("transform", "translate(" + (coords[0]+10) + "," + (coords[1]-10) + ")")
     }
   };

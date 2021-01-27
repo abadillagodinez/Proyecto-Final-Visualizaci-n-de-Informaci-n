@@ -53,21 +53,16 @@
                     return;
                 }
                 else if(opcion == "coordenadas"){
-                //document.getElementById("container").innerHTML = "";
-                //document.getElementById("grid").innerHTML = "";
+                ocultar('radar-cont');
                 document.getElementById("container").setAttribute("style", "text-align: left");
                 document.getElementById("grid").setAttribute("style", "text-align: left");
-                ocultar('radar-cont');
-                //mostrar('container');
+                
                     return visParCoords();
                 }
                 else if(opcion == "spider"){
                     ocultar('container');
-                mostrar('radar-cont');
-                document.getElementById("radar-cont").innerHTML = "";
-                document.getElementById("grid").innerHTML = "";
                 document.getElementById("radar-cont").setAttribute("style", "text-align: center");
-                document.getElementById("grid").setAttribute("style", "text-align: left");
+                document.getElementById("grid").setAttribute("style", "text-align: center");
                     return showRadar();
                 }
 
@@ -112,7 +107,7 @@
                     newSeries.axes.push({"axis":[headers[j]], "value": parseFloat(v)});
                     }
                 });
-                data.push(newSeries);
+                data.unshift(newSeries);
                 }
                 })
                 RadarChart.defaultConfig.radius = 3;
@@ -135,16 +130,13 @@
 
                 var divVal = document.getElementById('radar-cont');
                 animate(divVal,600);
-
+                var container = d3.select(this);
                 var grid = d3.divgrid();
                     d3.select("#grid")
                         .datum(csv)
                         .call(grid)
                         .selectAll(".row");
-                        //.on({
-                        //  "mouseover": function (d) { parcoords.highlight([d]); },
-                        //  "mouseout": RadarChart.unhighlight
-                        //});
+                    
                         
                 }
         </script>
