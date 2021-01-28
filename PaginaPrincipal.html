@@ -6,7 +6,9 @@
          <link rel="stylesheet" href="styles.css">
          <link rel="stylesheet" href="radar-chart.css">
     </head>
+    
     <script src="https://d3js.org/d3.v3.js"></script>
+    
     <script src="d3.parcoords.js"></script>
     <script src="divgrid.js"></script>
     <script src="gráficoCoordenadas.js"></script>
@@ -42,7 +44,9 @@
         <div id= 'lol'></div>
         <br>
         <div id="grid"></div>
-
+        <div id="barras">
+            
+        </div>
 
 
         <script id = "desplegar">
@@ -50,12 +54,19 @@
             {
                 var opcion = document.getElementById("selector").value;
                 if (opcion == "barras"){
+                    ocultar('radar-cont');
+                    ocultar('container');
+                    ocultar('grid');
+                    ocultar('lol');
+                    vis();
+                    mostrar('barras');
                     return;
                 }
                 else if(opcion == "lol"){
                     ocultar('radar-cont');
                     ocultar('container');
                     ocultar('grid');
+                    ocultar('barras');
                     mostrar('lol');
                     //document.getElementById("lol").setAttribute("style", "text-align: center");
                     crearLOL();
@@ -66,22 +77,24 @@
                 ocultar('radar-cont');
                 ocultar('lol');
                 ocultar('opcionesLol');
+                ocultar('barras');
                 //mostrar('container');
                 //mostrar('grid');
                 document.getElementById("container").setAttribute("style", "text-align: left");
                 document.getElementById("grid").setAttribute("style", "text-align: left");
                     
-                    return visParCoords();
+                    visParCoords();
                 }
                 else if(opcion == "spider"){
                     ocultar('container');
                     ocultar('lol');
                     ocultar('opcionesLol');
+                    ocultar('barras');
                     //mostrar('radar-cont');
                     //mostrar('grid');
                 document.getElementById("radar-cont").setAttribute("style", "text-align: center");
                 document.getElementById("grid").setAttribute("style", "text-align: center");
-                    return showRadar();
+                     showRadar();
                 }
 
             };
