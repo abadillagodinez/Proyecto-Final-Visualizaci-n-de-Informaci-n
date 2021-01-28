@@ -18,7 +18,7 @@
         <script src="graficoLOL.js"></script>
         <script src="graficoSpider.js"></script>
         <script src="gráficoCoordenadas.js"></script>
-        <div style="text-align: center;">
+        <div id="parametros" style="text-align: center;">
             <img src="images/logo2.jpg">
             
             <h1 class="header">Seleccione el tipo de gráfico que desea visualizar</h1>
@@ -33,6 +33,8 @@
             </select>
             <br> </br>
             <button class="button" name="aceptar" id="accept" onclick="desplegar()">Desplegar</button>
+            <div id="opcionesLol">
+            </div>
               
         </div>
         <div id='container'></div>
@@ -54,20 +56,29 @@
                     ocultar('radar-cont');
                     ocultar('container');
                     ocultar('grid');
+                    mostrar('lol');
                     //document.getElementById("lol").setAttribute("style", "text-align: center");
-                    return crearLOL();
+                    crearLOL();
+                    mostrar('opcionesLol');
+                    
                 }
                 else if(opcion == "coordenadas"){
                 ocultar('radar-cont');
                 ocultar('lol');
+                ocultar('opcionesLol');
+                //mostrar('container');
+                //mostrar('grid');
                 document.getElementById("container").setAttribute("style", "text-align: left");
                 document.getElementById("grid").setAttribute("style", "text-align: left");
-                
+                    
                     return visParCoords();
                 }
                 else if(opcion == "spider"){
                     ocultar('container');
                     ocultar('lol');
+                    ocultar('opcionesLol');
+                    //mostrar('radar-cont');
+                    //mostrar('grid');
                 document.getElementById("radar-cont").setAttribute("style", "text-align: center");
                 document.getElementById("grid").setAttribute("style", "text-align: center");
                     return showRadar();
