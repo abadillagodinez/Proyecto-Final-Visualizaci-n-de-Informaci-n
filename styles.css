@@ -2,6 +2,10 @@
     font-family: BeaufortforLOL-Bold;
     src: url("./BeaufortForLOL/beaufortforlol-bold.otf") format("opentype");
 }
+@font-face{
+    font-family: BeaufortforLOL-HeavyItalic;
+    src: url("./BeaufortForLOL/beaufortforlol-heavyitalic.otf") format("opentype");
+}
 
 .button{
     font-family: "BeaufortforLOL-Bold";
@@ -12,6 +16,11 @@
     border-color: #937341;
     color: #f0e6d2;
     border-radius:2em;
+}
+
+.champName{
+  font-family: "BeaufortforLOL-HeavyItalic";
+  font-size: 16px;
 }
 
 .header{
