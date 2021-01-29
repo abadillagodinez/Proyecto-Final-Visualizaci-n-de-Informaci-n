@@ -4,10 +4,10 @@ function crearLOL () {
         // create a new div element
         var parms = document.getElementById("opcionesLol");
         parms.appendChild(document.createElement("br")); //mete br
-
-        var labelBlue = document.createElement("p"); 
+        
+        var labelBlue = document.createElement("p");//se crea el label para mostrar los datos 
         labelBlue.id = "labelBlue";
-        labelBlue.className = "champName";
+        labelBlue.className = "champName";//se agrega una clase
         labelBlue.style.color = "#13a5de";
         labelBlue.innerHTML = "Blue Team: ";
 
@@ -16,9 +16,9 @@ function crearLOL () {
         selector2.style.width = "170px";
         selector2.style.fontFamily = "BeaufortforLOL-Bold";
 
-        var labelRed = document.createElement("p");
+        var labelRed = document.createElement("p");//se crea el label para mostrar los datos
         labelRed.id = "labelRed";
-        labelRed.className = "champName";
+        labelRed.className = "champName";//se agrega una clase
         labelRed.style.color = "#e42d29";
         labelRed.innerHTML = "Red Team: ";
         
@@ -29,10 +29,11 @@ function crearLOL () {
 
         var button = document.createElement("button");
         button.id = "btnLoadChamps";
-        button.className = "button";
+        button.className = "button";//se agrega una clase
         button.style.width = "150px";
         button.innerHTML = "Cargar Champs";
         button.onclick = loadChamps;
+        //se agregan todos los valores al div
         parms.appendChild(labelBlue);
         parms.appendChild(selector1);
         parms.appendChild(document.createElement("br"));
@@ -60,7 +61,7 @@ function crearLOL () {
             }
         });
     var newDiv = document.createElement("div");
-    newDiv.className = "image";
+    newDiv.className = "image";//se agrega una clase
     newDiv.style.height = "515px";
     newDiv.style.width = "600px";
     //newDiv.style.backgroundColor = "white";
@@ -72,7 +73,7 @@ function crearLOL () {
     var cont = document.getElementById("lol");
     cont.appendChild(newDiv);
     var champStatsDiv = document.createElement("div");
-    champStatsDiv.className = "header";
+    champStatsDiv.className = "header";//se agrega una clase
     champStatsDiv.style.height = "400px";
     champStatsDiv.style.width = "600px";
     champStatsDiv.style.marginLeft = "485px";
@@ -81,16 +82,17 @@ function crearLOL () {
     //se crea el div top
     var top = document.createElement("div");
     //se agregan Los TOPS
-    top.className = "top";
+    top.className = "top";//se agrega una clase
     newDiv.appendChild(top);
-        var TopRed = document.createElement("p");
+        var TopRed = document.createElement("p");//se crea el label para mostrar los datos
         TopRed.innerHTML = "Top";//AGREGAR VALOR DE LOS DATOS
-        TopRed.className = "champName";
+        TopRed.className = "champName";//se agrega una clase
         TopRed.style.paddingTop = "80px";
         TopRed.style.paddingLeft = "160px";
         TopRed.style.color = "#e42d29";
         TopRed.onclick = function(){
             var champName = TopRed.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -117,16 +119,17 @@ function crearLOL () {
                 } 
             });
         };
-        var TopBlue = document.createElement("p");
+        var TopBlue = document.createElement("p");//se crea el label para mostrar los datos
         TopBlue.id = "topblue";
         TopBlue.innerHTML = "Top";//AGREGAR VALOR DE LOS DATOS
-        TopBlue.className = "champName";
+        TopBlue.className = "champName";//se agrega una clase
         TopBlue.classList.add('tooltip');
         TopBlue.style.paddingTop = "5px";
         TopBlue.style.paddingLeft = "100px";
         TopBlue.style.color = "#13a5de";
         TopBlue.onclick = function(){
             var champName = TopBlue.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -158,16 +161,17 @@ function crearLOL () {
         top.appendChild(TopBlue);
     //se agrega el Jungle Blue
     var jungles = document.createElement("div");
-    jungles.className = "jungleBlue";
+    jungles.className = "jungleBlue";//se agrega una clase
     newDiv.appendChild(jungles);
-        var jungleBlue = document.createElement("p");
+        var jungleBlue = document.createElement("p");//se crea el label para mostrar los datos
         jungleBlue.innerHTML = "Jungle";//AGREGAR VALOR DE LOS DATOS
-        jungleBlue.className = "champName";
+        jungleBlue.className = "champName";//se agrega una clase
         jungleBlue.style.paddingTop = "50px";
         jungleBlue.style.paddingLeft = "130px";
         jungleBlue.style.color = "#13a5de";
         jungleBlue.onclick = function(){
             var champName = jungleBlue.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -197,15 +201,16 @@ function crearLOL () {
         jungles.appendChild(jungleBlue);
     //se agregan Los MIDS
     var mids = document.createElement("div");
-    mids.className = "mid";
+    mids.className = "mid";//se agrega una clase
     newDiv.appendChild(mids);
-        var midRed = document.createElement("p");
-        midRed.className = "champName";
+        var midRed = document.createElement("p");//se crea el label para mostrar los datos
+        midRed.className = "champName";//se agrega una clase
         midRed.innerHTML = "Mid";//AGREGAR VALOR DE LOS DATOS
         midRed.style.paddingLeft = "310px";
         midRed.style.color = "#e42d29";
         midRed.onclick = function(){
             var champName = midRed.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -232,13 +237,14 @@ function crearLOL () {
                 } 
             });
         };
-        var midBlue = document.createElement("p");
-        midBlue.className = "champName";
+        var midBlue = document.createElement("p");//se crea el label para mostrar los datos
+        midBlue.className = "champName";//se agrega una clase
         midBlue.innerHTML = "Mid";//AGREGAR VALOR DE LOS DATOS
         midBlue.style.paddingLeft = "270px";
         midBlue.style.color = "#13a5de";
         midBlue.onclick = function(){
             var champName = midBlue.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -265,13 +271,14 @@ function crearLOL () {
                 } 
             });
         };
-        var jungleRed = document.createElement("p");
-        jungleRed.className = "champName";
+        var jungleRed = document.createElement("p");//se crea el label para mostrar los datos
+        jungleRed.className = "champName";//se agrega una clase
         jungleRed.innerHTML = "Jungle";//AGREGAR VALOR DE LOS DATOS
         jungleRed.style.paddingLeft = "440px";
         jungleRed.style.color = "#e42d29";
         jungleRed.onclick = function(){
             var champName = jungleRed.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -303,15 +310,16 @@ function crearLOL () {
         mids.appendChild(jungleRed);
     //se agregan Los Support y Tiradores
     var SoporteTirador = document.createElement("div");
-    SoporteTirador.className = "SoporteTirador";
+    SoporteTirador.className = "SoporteTirador";//se agrega una clase
     newDiv.appendChild(SoporteTirador);
-        var supportRed = document.createElement("p");
-        supportRed.className = "champName";
+        var supportRed = document.createElement("p");//se crea el label para mostrar los datos
+        supportRed.className = "champName";//se agrega una clase
         supportRed.innerHTML = "Support";//AGREGAR VALOR DE LOS DATOS
         supportRed.style.paddingLeft = "490px";
         supportRed.style.color = "#e42d29";
         supportRed.onclick = function(){
             var champName = supportRed.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -338,14 +346,15 @@ function crearLOL () {
                 } 
             });
         };
-        var shooterRed = document.createElement("p");
-        shooterRed.className = "champName";
+        var shooterRed = document.createElement("p");//se crea el label para mostrar los datos
+        shooterRed.className = "champName";//se agrega una clase
         shooterRed.innerHTML = "ADC";//AGREGAR VALOR DE LOS DATOS
         shooterRed.style.paddingTop = "5px";
         shooterRed.style.paddingLeft = "500px";
         shooterRed.style.color = "#e42d29";
         shooterRed.onclick = function(){
             var champName = shooterRed.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -372,13 +381,14 @@ function crearLOL () {
                 } 
             });
         };
-        var supportBlue = document.createElement("p");
-        supportBlue.className = "champName";
+        var supportBlue = document.createElement("p");//se crea el label para mostrar los datos
+        supportBlue.className = "champName";//se agrega una clase
         supportBlue.innerHTML = "Support";//AGREGAR VALOR DE LOS DATOS
         supportBlue.style.paddingLeft = "440px";
         supportBlue.style.color = "#13a5de";
         supportBlue.onclick = function(){
             var champName = supportBlue.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -405,13 +415,14 @@ function crearLOL () {
                 } 
             });
         };
-        var shooterBlue = document.createElement("p");
-        shooterBlue.className = "champName";
+        var shooterBlue = document.createElement("p");//se crea el label para mostrar los datos
+        shooterBlue.className = "champName";//se agrega una clase
         shooterBlue.innerHTML = "ADC";//AGREGAR VALOR DE LOS DATOS
         shooterBlue.style.paddingLeft = "440px";
         shooterBlue.style.color = "#13a5de";
         shooterBlue.onclick = function(){
             var champName = shooterBlue.innerText;
+            //seleccion de datos para desplegar en cuadro detalles del campeon
             d3.csv("./Data/champ_stats_w_winRate_FINAL.csv", function(data){
                 var champStats = "";
                 for(j in data){
@@ -451,6 +462,7 @@ function crearLOL () {
         function loadChamps(){
             var redTeam = document.getElementById("select2").value;
             var blueTeam = document.getElementById("select1").value;
+            //seleccion de datos para desplegar en cada label del cuadro para el equipo azul
             d3.csv("./Data/ChampsPlayedByBlueTeams.csv", function(data){
                 for(index in data){
                     var team = data[index]["Team"];
@@ -464,6 +476,7 @@ function crearLOL () {
                     }
                 }
             });
+            //seleccion de datos para desplegar en cada label del cuadro para el equipo azul
             d3.csv("./Data/ChampsPlayedByRedTeams.csv", function(data){
                 for(index in data){
                     var team = data[index]["Team"];
