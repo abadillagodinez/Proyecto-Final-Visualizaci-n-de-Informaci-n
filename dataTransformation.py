@@ -37,6 +37,174 @@ def genCSVParCoods():
     file.write(newCsv)
     file.close()
 
+def genCSVBarras():
+    dataMatches = pd.read_csv("./Data/matches2020.csv")
+    dataChamps = pd.read_csv("./Data/champion_stats.csv")
+    newCsv = "Posicion,"
+    indexes = len(dataChamps.index)-1
+    i = 0
+    while(i < indexes):
+        champ = dataChamps["id"][i]
+        newCsv += champ + ","
+        i += 1
+    newCsv += dataChamps["id"][indexes] + "\n"
+
+    i = 0
+    newCsv += "Top,"
+    while(i < indexes):
+        champ = dataChamps["id"][i]
+        winRateOnTop = calculateWinRateTop(champ,dataMatches)
+        newCsv += str(round(winRateOnTop,3)) + ","
+        i += 1
+    lastWRTop = calculateWinRateTop(dataChamps["id"][indexes], dataMatches)
+    newCsv += str(round(lastWRTop,3)) + "\n"
+
+    i = 0
+    newCsv += "Jungle,"
+    while(i < indexes):
+        champ = dataChamps["id"][i]
+        winRateOnTop = calculateWinRateJungle(champ,dataMatches)
+        newCsv += str(round(winRateOnTop,3)) + ","
+        i += 1
+    lastWRTop = calculateWinRateJungle(dataChamps["id"][indexes], dataMatches)
+    newCsv += str(round(lastWRTop,3)) + "\n"
+
+    i = 0
+    newCsv += "Mid,"
+    while(i < indexes):
+        champ = dataChamps["id"][i]
+        winRateOnTop = calculateWinRateMid(champ,dataMatches)
+        newCsv += str(round(winRateOnTop,3)) + ","
+        i += 1
+    lastWRTop = calculateWinRateMid(dataChamps["id"][indexes], dataMatches)
+    newCsv += str(round(lastWRTop,3)) + "\n"
+
+    i = 0
+    newCsv += "Adc,"
+    while(i < indexes):
+        champ = dataChamps["id"][i]
+        winRateOnTop = calculateWinRateAdc(champ,dataMatches)
+        newCsv += str(round(winRateOnTop,3)) + ","
+        i += 1
+    lastWRTop = calculateWinRateAdc(dataChamps["id"][indexes], dataMatches)
+    newCsv += str(round(lastWRTop,3)) + "\n"
+
+    i = 0
+    newCsv += "Support,"
+    while(i < indexes):
+        champ = dataChamps["id"][i]
+        winRateOnTop = calculateWinRateSupp(champ,dataMatches)
+        newCsv += str(round(winRateOnTop,3)) + ","
+        i += 1
+    lastWRTop = calculateWinRateSupp(dataChamps["id"][indexes], dataMatches)
+    newCsv += str(round(lastWRTop,3))
+    print(newCsv)
+     
+def calculateWinRateTop(champ, dataMatches):
+    pickCant = 0
+    winCant = 0
+    for i in dataMatches.index:
+        rTop = dataMatches["redtop"][i]
+        bTop = dataMatches["bluetop"][i]
+        win = dataMatches["result"][i]
+        if (champ == rTop  and win == 0) or (champ == bTop and win == 1):
+            winCant = winCant + 1
+    
+    for i in dataMatches.index:
+        rTop = dataMatches["redtop"][i]
+        bTop = dataMatches["bluetop"][i]
+        if (champ == rTop or champ == bTop):
+            pickCant = pickCant + 1
+    
+    if(pickCant > 0):
+        return ((winCant/pickCant)*100)
+    else:
+        return 0
+
+def calculateWinRateJungle(champ, dataMatches):
+    pickCant = 0
+    winCant = 0
+    for i in dataMatches.index:
+        rTop = dataMatches["redjungle"][i]
+        bTop = dataMatches["bluejungle"][i]
+        win = dataMatches["result"][i]
+        if (champ == rTop  and win == 0) or (champ == bTop and win == 1):
+            winCant = winCant + 1
+    
+    for i in dataMatches.index:
+        rTop = dataMatches["redjungle"][i]
+        bTop = dataMatches["bluejungle"][i]
+        if (champ == rTop or champ == bTop):
+            pickCant = pickCant + 1
+    
+    if(pickCant > 0):
+        return ((winCant/pickCant)*100)
+    else:
+        return 0
+
+def calculateWinRateMid(champ, dataMatches):
+    pickCant = 0
+    winCant = 0
+    for i in dataMatches.index:
+        rTop = dataMatches["redmid"][i]
+        bTop = dataMatches["bluemid"][i]
+        win = dataMatches["result"][i]
+        if (champ == rTop  and win == 0) or (champ == bTop and win == 1):
+            winCant = winCant + 1
+    
+    for i in dataMatches.index:
+        rTop = dataMatches["redmid"][i]
+        bTop = dataMatches["bluemid"][i]
+        if (champ == rTop or champ == bTop):
+            pickCant = pickCant + 1
+    
+    if(pickCant > 0):
+        return ((winCant/pickCant)*100)
+    else:
+        return 0
+    
+def calculateWinRateAdc(champ, dataMatches):
+    pickCant = 0
+    winCant = 0
+    for i in dataMatches.index:
+        rTop = dataMatches["redadc"][i]
+        bTop = dataMatches["blueadc"][i]
+        win = dataMatches["result"][i]
+        if (champ == rTop  and win == 0) or (champ == bTop and win == 1):
+            winCant = winCant + 1
+    
+    for i in dataMatches.index:
+        rTop = dataMatches["redadc"][i]
+        bTop = dataMatches["blueadc"][i]
+        if (champ == rTop or champ == bTop):
+            pickCant = pickCant + 1
+    
+    if(pickCant > 0):
+        return ((winCant/pickCant)*100)
+    else:
+        return 0
+
+def calculateWinRateSupp(champ, dataMatches):
+    pickCant = 0
+    winCant = 0
+    for i in dataMatches.index:
+        rTop = dataMatches["redsupport"][i]
+        bTop = dataMatches["bluesupport"][i]
+        win = dataMatches["result"][i]
+        if (champ == rTop  and win == 0) or (champ == bTop and win == 1):
+            winCant = winCant + 1
+    
+    for i in dataMatches.index:
+        rTop = dataMatches["redsupport"][i]
+        bTop = dataMatches["bluesupport"][i]
+        if (champ == rTop or champ == bTop):
+            pickCant = pickCant + 1
+    
+    if(pickCant > 0):
+        return ((winCant/pickCant)*100)
+    else:
+        return 0
+
 def calculateWinRate(champ, dataMatches):
     winCant = 0
     pickCant = 0
@@ -227,4 +395,5 @@ def most_frequent(List):
 # genCSVSpider()
 # getAllTeamsRed()
 # print(getMostAdcPlayedByBTeam("T1"))
-genCSVMap()
+# genCSVMap()
+genCSVBarras()

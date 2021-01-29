@@ -32,7 +32,7 @@ var svg = d3.select("#barras").append("svg")
   .style("fill","white")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("data.csv", function(error, data) {
+d3.csv("./Data/WinRate_Champs_By_Position_FINAL.csv", function(error, data) {
   if (error) throw error;
 
   var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "State"; });
